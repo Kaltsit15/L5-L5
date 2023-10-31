@@ -1,0 +1,24 @@
+<h1>登録ユーザ一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+    　<th>ユーザー削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.uid %></td>
+            <td><%= link_to '削除', "/users/#{user.uid}", method: :delete %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<p>
+    <%= link_to '新規ユーザー登録', users_new_path %><br>
+    <%= link_to 'ツイート一覧に戻る', root_path %>
+</p>

@@ -1,0 +1,47 @@
+<% if @user_id == nil %>
+    <%= link_to 'ログイン', controller: :top,action: :login_form %>
+<% else %>
+    <h1><%= @user_id %>さんようこそ</h1>
+    <%= link_to 'ログアウト', controller: :top,action: :logout %>
+<% end %>
+<h1>ツイート一覧</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>メッセージ</th>
+    　<th>いいね数</th>
+    　<% if @user_id != nil %>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tweets.each do |e| %>
+      <tr>
+        <td><%= e.message %></td>
+        <td><center><%= e.likes.count %></center></td>
+        <% if @user_id != nil %>
+          <td> <%= link_to 'いいね',  controller: :likes, action: :create, tweet_id: e.id, method: :post %> </td>
+          <td><%= link_to 'いいね削除', like_path(e), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<% if @user_id != nil %>    
+  <h1>「ツイート投稿」</h1>
+
+  <%= form_tag '/tweets/create', method: :post, data: { turbo: false} do %>
+      <%= label_tag :message, 'ツイート内容' %>
+      <%= text_field_tag :message %><br>
+      <%= hidden_field_tag :uid, @user_id %>
+      <%= submit_tag '投稿' %><br>
+      <%= link_to '', controller: :tweets,action: :create %>
+  <% end %>
+<% end %>
+<%= link_to 'ユーザー一覧', controller: :users,action: :index %>
