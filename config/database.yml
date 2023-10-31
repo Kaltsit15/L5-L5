@@ -21,11 +21,11 @@ test:
   database: db/test.sqlite3
 
 production:
-<<: *default
-adapter: postgresql
-encoding: unicode
-pool: 5
-database: test_render_cbm5
-username: test_render_cbm5_user
-password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
-url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: test_render_cbm5
+  username: test_render_cbm5_user
+  password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
