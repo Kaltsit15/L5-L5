@@ -1,0 +1,8 @@
+<h1>「ツイート投稿」</h1>
+
+<%= form_tag '/tweets/create', method: :post, data: { turbo: false} do %>
+    <%= label_tag :message, 'ツイート内容' %>
+    <%= text_field_tag :message %><br>
+    <%= submit_tag '投稿' %><br>
+    <%= link_to '', controller: :users,action: :index %>
+<% end %>
